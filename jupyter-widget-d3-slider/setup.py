@@ -142,7 +142,7 @@ setup_args = {
         ('share/jupyter/nbextensions/widget-d3-slider', [
             'widget_d3_slider/static/extension.js',
             'widget_d3_slider/static/index.js',
-            # 'widget_d3_slider/static/index.js.map',
+            'widget_d3_slider/static/index.js.map',
         ]),
     ],
     'install_requires': [
