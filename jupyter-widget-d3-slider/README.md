@@ -68,10 +68,10 @@ To check nbextensions are properly install and enabled, for example:
 The pip installation is standard except for 2 points:
 + the compiled js must be present in static/ beforehand
     + the role of npm and webpack is to build the folder static/ from the js/lib/ source files
-    + Note that setup.py is customised so as to run `npm instal` if all of the target files are not in static/
+    + Note that setup.py is customised so as to run `npm install` if all of the target files are not in static/
 + the data files are located in `share/jupyter/nbextensions/widget-d3-slider`
 
-If it is a dev install, an `egg-link` file is present in the following folder instead of an `egg-info` folder.
+If it is a dev install, an `egg-link` file is present in the following folder (or similar) instead of an `egg-info` folder.
 
     /usr/local/anaconda3/lib/python3.6/site-packages
 
