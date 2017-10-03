@@ -1,24 +1,28 @@
-jupyter-widget-d3-slider
-===============================
+# jupyter-widget-d3-slider
 
-A Custom Jupyter Widget Library
+## 1 - Installation
 
-Installation
-------------
-
-To install use pip:
+Regular install:
 
     $ pip install widget_d3_slider
     $ jupyter nbextension enable --py --sys-prefix widget_d3_slider
 
 
-For a development installation (requires npm):
+Dev install - requires npm:
 
-    $ git clone https://github.com/oscar6echo/jupyter-widget-d3-slider.git
-    $ cd jupyter-widget-d3-slider
+    $ git clone https://gitlab.com/oscar6echo/jupyter-widget-d3-slider.git
+    $ cd jupyter-widget-d3-slider/js
+    $ npm install
+    $ cd ..
     $ pip install -e .
     $ jupyter nbextension install --py --symlink --sys-prefix widget_d3_slider
     $ jupyter nbextension enable --py --sys-prefix widget_d3_slider
+
+
+## 2 - Paths
+
+All the paths directly from my system (macOS with [Anaconda](https://www.anaconda.com/what-is-anaconda/) installed with [brew](https://brew.sh/)) where sys.prefix = `/usr/local/anaconda3`.  
+It should be relatively easy to translate in yours.  
 
 
 To check where jupyter install extensions:
@@ -37,14 +41,15 @@ To check where jupyter install extensions:
     runtime:
         /Users/Olivier/Library/Jupyter/runtime
 
-The flag `--sys-prefix` means you should look for extensions in folder:
+The flag `--sys-prefix` means extension are installed in this data folder:
 
     /usr/local/anaconda3/share/jupyter
 
-There you should see folders or symlink back to your source code folder, for example:
+There you can see a `widget-d3-slider` folder or symlink back to the source folder `static/`.  
+For example:
 
     drwxr-xr-x  4 Olivier  staff   136B Sep 30 18:09 jupyter-js-widgets/
-    lrwxr-xr-x  1 Olivier  staff   115B Oct  1 21:11 widget-d3-slider -> /Users/Olivier/Dropbox/Archives/Software/Python/widget-d3-slider-2/jupyter-widget-d3-slider/widget_d3_slider/static
+    drwxr-xr-x  5 Olivier  staff   170B Oct  3 02:42 widget-d3-slider/
 
 To check nbextensions are properly install and enabled, for example:
 
@@ -65,25 +70,75 @@ To check nbextensions are properly install and enabled, for example:
         widget-d3-slider/extension  enabled 
         - Validating: OK
 
-The pip installation is standard except for 2 points:
-+ the compiled js must be present in static/ beforehand
-    + the role of npm and webpack is to build the folder static/ from the js/lib/ source files
-    + Note that setup.py is customised so as to run `npm install` if all of the target files are not in static/
-+ the data files are located in `share/jupyter/nbextensions/widget-d3-slider`
+## 3 - Commands
 
-If it is a dev install, an `egg-link` file is present in the following folder (or similar) instead of an `egg-info` folder.
+### 3.1 - `npm install`
 
-    /usr/local/anaconda3/lib/python3.6/site-packages
+It is run from folder `js/` which contains the js+css **source code**.  
+It performs the following:
++ Download the node modules mentioned in fields `dependencies` and `devDependencies` in npm config file `package.json`.
++ Run `webpack` according to config file `webpack.config.js`
 
-In a dev context the simplest step is to run `webpack` i.e.:
+The outcome is the creation of folders `js/dist` and `widget_d3_slider/static` containing compiled javascript from source code in folder `js/`.
 
-    $ npm run prepublish
+### 3.2 - `pip install`
 
-This re-compile the source js folder into static/ just do the following the first time:
+The full command is:
+```bash
+# regular install from folder js/
+$ pip install .
 
-    $ npm install
+# dev install from folder js/
+$ pip install -e .
+```
 
-`npm install` downloads the packages from the internet the first time, then looks for them in ~/.npm afterwards. `npm install` also runs predefined scripts (see which in the [official doc](https://docs.npmjs.com/misc/scripts)) if present like `prepublish` (deprecated, to be updated). 
+This command must be run **AFTER** the folder `static/` was created.
 
-After static/ is built you can just reload the notebook. The new js is available instantly.  
+It takes place in a standard fashion:
++ The source files and egg-info are copied to `/usr/local/anaconda3/lib/python3.6/site-packages`
++ The files in folder `static/` are copied to `share/jupyter/nbextensions/widget-d3-slider`
++ Note that for a **dev install**:
+    + An `egg-link` links back to the source folder
+    + No file is copied to the folder `nbextensions/widget-d3-slider`
+
+### 3.2 - `jupyter nbextension (install|uninstall)`
+
+The full command is:
+```bash
+$ jupyter nbextension (install|uninstall) --py [--symlink] --sys-prefix widget_d3_slider
+```
+
+It copies [create symlinks] resp. removes `static/` files to resp. from the nbextension data folder `share/jupyter/nbextensions/widget-d3-slider` and adds resp. removes lines in config file `notebook.json` in config directory `/usr/local/anaconda3/etc/jupyter`.
+
+The config file `notebook.json` contains the following:
+
+    {
+        "load_extensions": {
+            "jupyter-js-widgets/extension": true,
+            "widget-d3-slider/extension": true
+        }
+    }
+
+
+### 3.3 - `jupyter nbextension (enable|disable)`
+
+The full command is:
+```bash
+$ jupyter nbextension (enable|disable) --py --sys-prefix widget_d3_slider
+```
+
+It sets to true resp. false the `widget-d3-slider/extension` line in config file `notebook.json` in config directory `/usr/local/anaconda3/etc/jupyter`.
+
+### 3.4 - `npm prepare`
+
+The full command is:
+```bash
+# from folder js/
+$ npm run prepare
+```
+It is a script (which simply calls `webpack`) in npm config file `package.json`.  
+
+In an active dev activity (in the folder `js/`) substitute `npm install` by `npm prepare` as there is no need to reload node_modues from the internet or even to get them from the local npm cache (located in `~/.npm`)
+
+This re-compile the source js folder into `static/`. The symlinks bring back from `share/jupyter/nbextensions/widget-d3-slider` to `js/static/`. So just reload the notebook. The new js is available instantly !
 

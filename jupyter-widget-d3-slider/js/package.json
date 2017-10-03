@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "description": "A Custom Jupyter Widget Library",
   "author": "oscar6echo",
+  "license": "MIT",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/oscar6echo/jupyter-widget-d3-slider.git"
+    "url": "https://gitlab.com/oscar6echo/jupyter-widget-d3-slider.git"
   },
   "keywords": [
     "jupyter",
@@ -19,8 +20,9 @@
     "dist/*.js"
   ],
   "scripts": {
-    "clean": "rimraf dist/",
-    "prepublish": "webpack",
+    "clean": "rimraf dist/ && rimraf ../widget_d3_slider/static/",
+    "cleanall": "npm run clean && rimraf node_modules/",
+    "prepare": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
