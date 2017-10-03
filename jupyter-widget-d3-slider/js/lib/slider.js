@@ -74,7 +74,7 @@ var create = function (that) {
 	// add handle to slider
 	var handle = slider.insert('circle', '.track-overlay')
 		.attr('class', 'handle')
-		.attr('r', 9);
+		.attr('r', 7);
 
 	// function to move handle and color background for a given h(ue)
 	var hue = function (h) {
@@ -92,17 +92,22 @@ var create = function (that) {
 	var h = that.model.get('value');
 
 	// direct set
-	hue(h);
+	// hue(h);
 
 	// // tweened intro
-	// slider.transition()
-	// 	.duration(750)
-	// 	.tween('hue', function () {
-	// 		var i = d3.interpolate(0, h);
-	// 		return function (t) { hue(i(t)); };
-	// 	});
+	slider.transition()
+		.duration(750)
+		.tween('hue', function () {
+			var i = d3.interpolate(0, h);
+			return function (t) { hue(i(t)); };
+		});
 
 	// store for value_changed
+	// that is an object to which you can attach stuff
+	// for later use in value_changed()
+	that.hue = hue;
+	// that.slider = slider;
+
 
 };
 
@@ -113,33 +118,17 @@ var value_changed = function (that) {
 	var new_h = that.model.get('value');
 
 	// debug
-	window.prev_h = prev_h;
-	window.new_h = new_h;
+	console.log('prev_h = ' + prev_h + ', new_h = ' + new_h);
 
-
-	// REPEAT RENDER - VERY INEFFICIENT
-	var handle = d3.selectAll('.handle'); // selectAll is key
-	var svg = d3.selectAll('.area'); // selectAll is key
-
-	var margin = { right: 40, left: 40 };
-	var width = +svg.attr('width') - margin.left - margin.right;
-
-	var x = d3.scaleLinear()
-		.domain([0, 180])
-		.range([0, width])
-		.clamp(true);
-
-	var hue = function (h) {
-		handle.attr('cx', x(h));
-		svg.style('background-color', d3.hsl(h, 0.8, 0.8));
-	};
-	// END REPEAT
+	// collect function hue store in that during render()
+	var hue = that.hue;
+	// var slider = that.slider;
 
 	// direct set
 	hue(new_h);
 
-	// // tweened intro
-	// var slider = d3.select('.slider');
+	// tweened move - works but does not fit
+	// jupyter-widget 1 model - many views concept
 	// slider.transition()
 	// 	.duration(750)
 	// 	.tween('hue', function () {
