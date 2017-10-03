@@ -1,10 +1,13 @@
-A Custom Jupyter Widget Library
 
-Package Install
----------------
+# jupyter-widget-d3-slider - javascript part
 
-**Prerequisites**
-- [node](http://nodejs.org/)
+## 1 - Prerequisite
+
+[node](http://nodejs.org/) is a prerequisite.  
+
+## 2 - Install
+
+From folder `widget-d3-slider/js/`:
 
 ```bash
 npm install --save widget-d3-slider
