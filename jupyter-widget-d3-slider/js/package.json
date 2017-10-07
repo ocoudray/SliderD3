@@ -1,6 +1,6 @@
 {
-  "name": "widget-d3-slider",
-  "version": "0.1.0",
+  "name": "jupyter-widget-d3-slider",
+  "version": "0.1.6",
   "description": "A Custom Jupyter Widget Library",
   "author": "oscar6echo",
   "license": "MIT",
@@ -16,7 +16,6 @@
     "ipywidgets"
   ],
   "files": [
-    "lib/**/*.js",
     "dist/*.js"
   ],
   "scripts": {

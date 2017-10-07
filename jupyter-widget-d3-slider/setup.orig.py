@@ -131,7 +131,7 @@ setup_args = {
     'long_description': LONG_DESCRIPTION,
     'include_package_data': True,
     'data_files': [
-        ('share/jupyter/nbextensions/widget-d3-slider', [
+        ('share/jupyter/nbextensions/jupyter-widget-d3-slider', [
             'widget_d3_slider/static/extension.js',
             'widget_d3_slider/static/index.js',
             'widget_d3_slider/static/index.js.map',

@@ -33,7 +33,7 @@ __classifiers__ = ['Development Status :: 4 - Beta',
                    ]
 __include_package_data__ = True
 __data_files__ = [
-    ('share/jupyter/nbextensions/widget-d3-slider', [
+    ('share/jupyter/nbextensions/jupyter-widget-d3-slider', [
         'widget_d3_slider/static/extension.js',
         'widget_d3_slider/static/index.js',
         'widget_d3_slider/static/index.js.map',

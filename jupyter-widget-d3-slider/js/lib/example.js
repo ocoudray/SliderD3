@@ -24,8 +24,8 @@ var HelloModel = widgets.DOMWidgetModel.extend({
 	defaults: _.extend(widgets.DOMWidgetModel.prototype.defaults(), {
 		_model_name: 'HelloModel',
 		_view_name: 'HelloView',
-		_model_module: 'widget-d3-slider',
-		_view_module: 'widget-d3-slider',
+		_model_module: 'jupyter-widget-d3-slider',
+		_view_module: 'jupyter-widget-d3-slider',
 		_model_module_version: '0.1.0',
 		_view_module_version: '0.1.0',
 		value: 'Hello World'
@@ -50,8 +50,8 @@ var SliderModel = widgets.DOMWidgetModel.extend({
 	defaults: _.extend(widgets.DOMWidgetModel.prototype.defaults(), {
 		_model_name: 'SliderModel',
 		_view_name: 'SliderView',
-		_model_module: 'widget-d3-slider',
-		_view_module: 'widget-d3-slider',
+		_model_module: 'jupyter-widget-d3-slider',
+		_view_module: 'jupyter-widget-d3-slider',
 		_model_module_version: '0.1.0',
 		_view_module_version: '0.1.0',
 		value: 1.0

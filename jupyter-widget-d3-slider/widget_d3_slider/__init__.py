@@ -6,6 +6,6 @@ def _jupyter_nbextension_paths():
     return [{
         'section': 'notebook',
         'src': 'static',
-        'dest': 'widget-d3-slider',
-        'require': 'widget-d3-slider/extension'
+        'dest': 'jupyter-widget-d3-slider',
+        'require': 'jupyter-widget-d3-slider/extension'
     }]

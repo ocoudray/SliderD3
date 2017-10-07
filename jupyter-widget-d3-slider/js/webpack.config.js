@@ -62,7 +62,7 @@ module.exports = [
 			filename: 'index.js',
 			path: path.resolve(__dirname, 'dist'),
 			libraryTarget: 'amd',
-			publicPath: 'https://unpkg.com/widget-d3-slider@' + version + '/dist/'
+			publicPath: 'https://unpkg.com/jupyter-widget-d3-slider@' + version + '/dist/'
 		},
 		devtool: 'source-map',
 		module: {

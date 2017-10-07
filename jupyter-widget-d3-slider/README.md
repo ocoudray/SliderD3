@@ -96,10 +96,10 @@ This command must be run **AFTER** the folder `static/` was created.
 
 It takes place in a standard fashion:
 + The source files and egg-info are copied to `/usr/local/anaconda3/lib/python3.6/site-packages`
-+ The files in folder `static/` are copied to `share/jupyter/nbextensions/widget-d3-slider`
++ The files in folder `static/` are copied to `share/jupyter/nbextensions/jupyter-widget-d3-slider`
 + Note that for a **dev install**:
     + An `egg-link` links back to the source folder
-    + No file is copied to the folder `nbextensions/widget-d3-slider`
+    + No file is copied to the folder `nbextensions/jupyter-widget-d3-slider`
 
 ### 3.2 - `jupyter nbextension (install|uninstall)`
 
@@ -108,14 +108,14 @@ The full command is:
 $ jupyter nbextension (install|uninstall) --py [--symlink] --sys-prefix widget_d3_slider
 ```
 
-It copies [create symlinks] resp. removes `static/` files to resp. from the nbextension data folder `share/jupyter/nbextensions/widget-d3-slider` and adds resp. removes lines in config file `notebook.json` in config directory `/usr/local/anaconda3/etc/jupyter`.
+It copies [create symlinks] resp. removes `static/` files to resp. from the nbextension data folder `share/jupyter/nbextensions/jupyter-widget-d3-slider` and adds resp. removes lines in config file `notebook.json` in config directory `/usr/local/anaconda3/etc/jupyter`.
 
 The config file `notebook.json` contains the following:
 
     {
         "load_extensions": {
             "jupyter-js-widgets/extension": true,
-            "widget-d3-slider/extension": true
+            "jupyter-widget-d3-slider/extension": true
         }
     }
 
@@ -140,5 +140,5 @@ It is a script (which simply calls `webpack`) in npm config file `package.json`.
 
 In an active dev activity (in the folder `js/`) substitute `npm install` by `npm prepare` as there is no need to reload node_modues from the internet or even to get them from the local npm cache (located in `~/.npm`)
 
-This re-compile the source js folder into `static/`. The symlinks bring back from `share/jupyter/nbextensions/widget-d3-slider` to `js/static/`. So just reload the notebook. The new js is available instantly !
+This re-compile the source js folder into `static/`. The symlinks bring back from `share/jupyter/nbextensions/jupyter-widget-d3-slider` to `js/static/`. So just reload the notebook. The new js is available instantly !
 

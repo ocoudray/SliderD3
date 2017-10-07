@@ -7,7 +7,7 @@ if (window.require) {
 	window.require.config({
 		map: {
 			"*": {
-				"widget-d3-slider": "nbextensions/widget-d3-slider/index",
+				"jupyter-widget-d3-slider": "nbextensions/jupyter-widget-d3-slider/index",
 			}
 		}
 	});
