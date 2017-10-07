@@ -79,8 +79,12 @@ var SliderView = widgets.DOMWidgetView.extend({
 
 	value_changed: function () {
 
+		console.log('start value_changed');
+
+		// explicit
 		var that = this;
 
+		// update
 		d3_slider.value_changed(that);
 	}
 });

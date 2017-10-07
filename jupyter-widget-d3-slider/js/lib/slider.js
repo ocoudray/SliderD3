@@ -1,6 +1,6 @@
 
 var d3 = require('d3');
-var slider_css = require('./slider.css');
+require('./slider.less');
 
 
 
@@ -12,21 +12,14 @@ var create = function (that) {
 	svgElmt.setAttribute('width', '900');
 	svgElmt.setAttribute('height', '100');
 
-	// append css to svg element
-	var link = document.createElement('link');
-	link.href = slider_css;
-	link.type = 'text/css';
-	link.rel = 'stylesheet';
-	svgElmt.appendChild(link);
-
 	// append svg element to dom
 	that.el.appendChild(svgElmt);
-	console.log('svg added to dom');
+
+	that.el.setAttribute('class', 'jupyter-widget d3-slider');
 
 	// d3 select 
-	var svg = d3.select(svgElmt)
-		.attr('class', 'area');
-	console.log('svg selected');
+	var svg = d3.select(svgElmt);
+	// .attr('class', 'area');
 	window.svg = svg;
 
 	// Attributes
@@ -42,27 +35,27 @@ var create = function (that) {
 
 	// slider
 	var slider = svg.append('g')
-		.attr('class', 'slider')
+		.attr('class', 'jupyter-widget d3-slider slider')
 		.attr('transform', 'translate(' + margin.left + ',' + height / 2 + ')');
 
 	// build slider and attach drag behavior
 	slider.append('line')
-		.attr('class', 'track')
+		.attr('class', 'jupyter-widget d3-slider track')
 		.attr('x1', x.range()[0])
 		.attr('x2', x.range()[1])
 		.select(function () { return this.parentNode.appendChild(this.cloneNode(true)); })
-		.attr('class', 'track-inset')
+		.attr('class', 'jupyter-widget d3-slider track-inset')
 		.select(function () { return this.parentNode.appendChild(this.cloneNode(true)); })
-		.attr('class', 'track-overlay')
+		.attr('class', 'jupyter-widget d3-slider track-overlay')
 		.call(d3.drag()
-			.on('start', function () { console.log('start'); })
-			.on('drag', function () { console.log('drag'); hue(x.invert(d3.event.x)); })
-			.on('end', function () { console.log('end'); sync_value(x.invert(d3.event.x)); })
+			.on('start', function () { })
+			.on('drag', function () { hue(x.invert(d3.event.x)); })
+			.on('end', function () { sync_value(x.invert(d3.event.x)); })
 		);
 
 	// add ticks to slider
 	slider.insert('g', '.track-overlay')
-		.attr('class', 'ticks')
+		.attr('class', 'jupyter-widget d3-slider ticks')
 		.attr('transform', 'translate(0,' + 18 + ')')
 		.selectAll('text')
 		.data(x.ticks(10))
@@ -73,7 +66,7 @@ var create = function (that) {
 
 	// add handle to slider
 	var handle = slider.insert('circle', '.track-overlay')
-		.attr('class', 'handle')
+		.attr('class', 'jupyter-widget d3-slider handle')
 		.attr('r', 7);
 
 	// function to move handle and color background for a given h(ue)
@@ -108,7 +101,7 @@ var create = function (that) {
 	that.hue = hue;
 	// that.slider = slider;
 
-
+	console.log('end create');	
 };
 
 
