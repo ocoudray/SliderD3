@@ -49,7 +49,7 @@ var create = function (that) {
 		.attr('class', 'jupyter-widget d3-slider track-overlay')
 		.call(d3.drag()
 			.on('start', function () { })
-			.on('drag', function () { hue(x.invert(d3.event.x)); })
+			.on('drag', function () { hue(x.invert(d3.event.x)); that.text.textContent=x.invert(d3.event.x);})
 			.on('end', function () { sync_value(x.invert(d3.event.x)); })
 		);
 
@@ -79,6 +79,7 @@ var create = function (that) {
 	var sync_value = function (h) {
 		that.model.set({ 'value': h });
 		that.model.save_changes();
+		that.text.textContent = h; // update text content
 	};
 
 	// init values
@@ -101,6 +102,13 @@ var create = function (that) {
 	that.hue = hue;
 	// that.slider = slider;
 
+	// add text to display value while dragging
+	var text = document.createElement("p");
+	text.setAttribute("style", "text-align : center");
+	text.textContent = h;
+	that.el.appendChild(text);
+	that.text = text;
+
 	console.log('end create');	
 };
 
@@ -120,6 +128,8 @@ var value_changed = function (that) {
 	// direct set
 	hue(new_h);
 
+	// update text value
+	that.text.textContent = new_h;
 	// tweened move - works but does not fit
 	// jupyter-widget 1 model - many views concept
 	// slider.transition()

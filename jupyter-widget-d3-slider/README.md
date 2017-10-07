@@ -142,3 +142,11 @@ In an active dev activity (in the folder `js/`) substitute `npm install` by `npm
 
 This re-compile the source js folder into `static/`. The symlinks bring back from `share/jupyter/nbextensions/jupyter-widget-d3-slider` to `js/static/`. So just reload the notebook. The new js is available instantly !
 
+### 3.5 - `npm watch`
+
+The full command is:
+```bash
+# from folder js/
+$ npm run watch
+```
+This script automatically triggers a `npm run prepare` command (`webpack`) each time a change is detected in the folder js/lib. Still, the notebook has to be relaoded for the new js to be available.
