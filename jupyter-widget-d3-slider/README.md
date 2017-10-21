@@ -150,3 +150,19 @@ The full command is:
 $ npm run watch
 ```
 This script automatically triggers a `npm run prepare` command (`webpack`) each time a change is detected in the folder js/lib. Still, the notebook has to be relaoded for the new js to be available.
+
+## 4. About the interaction between jupyter nb and conda env
+
+- If jupyter is not installed in conda env, the default path when executing 'jupyter notebook' is the jupyter install in the root environment. Thus when a kernel is started in this configuration, it is launched inside the root conda env. On the top right side of the nb, "Python 3" is printed. To start a kernel inside another environment, you have to run the following commands :
+
+```bash
+source activate myenv
+conda install ipykernel
+python -m ipykernel install --user --name myenv --display-name "Python (myenv)"
+```
+
+Then in your nb : Kernel > change kernel > Python(myenv).
+
+- If jupyter is installed in your conda env "myenv", the default path when executing 'jupyter notebook' from the env is the jupyter install in "myenv". Thus when a kernel is started in this configuration, it is launched inside this env, even though "Python 3" is printed in the nb. To start a kernel inside another environment, the same as above still applies.
+
+As far as widgets are concerned: widgets may only be installed in a conda env which contains jupyter. If you run the installation of widgets inside a conda env, they should be installed within the jupyter bundle inside this conda env.
