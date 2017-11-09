@@ -9,7 +9,7 @@ from setuptools import setup, find_packages
 module = 'widget_d3_slider'
 
 meta_ns = {}
-path = os.path.abspath(convert_path(module + '/__meta__.py'))
+path = convert_path(module + '/__meta__.py')
 with open(path) as meta_file:
     exec(meta_file.read(), meta_ns)
 
