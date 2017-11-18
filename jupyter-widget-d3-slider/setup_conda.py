@@ -26,10 +26,16 @@ keywords = meta_ns['__keywords__']
 license = meta_ns['__license__']
 classifiers = meta_ns['__classifiers__']
 include_package_data = meta_ns['__include_package_data__']
-data_files = meta_ns['__data_files__']
 install_requires = meta_ns['__install_requires__']
 zip_safe = meta_ns['__zip_safe__']
 
+data_files = [
+    ('share/jupyter/nbextensions/jupyter-widget-d3-slider', [
+        'jupyter-widget-d3-slider/widget_d3_slider/static/extension.js',
+        'jupyter-widget-d3-slider/widget_d3_slider/static/index.js',
+        'jupyter-widget-d3-slider/widget_d3_slider/static/index.js.map',
+    ])
+]
 
 # ref https://packaging.python.org/tutorials/distributing-packages/
 setup_args = {
