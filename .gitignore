@@ -11,7 +11,6 @@ js/lib/block/*
 
 */*/node_modules/
 
-*/*/static/
 js/dist/
 
 .DS_Store
